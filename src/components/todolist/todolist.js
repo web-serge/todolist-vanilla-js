@@ -1,4 +1,4 @@
-import {deleteTask} from "../../data.js";
+import {deleteTask, filteredTask} from "../../data.js";
 
 export function renderTodolist(state) {
     const container = document.createElement('div');
@@ -49,10 +49,16 @@ function createFilterButtons() {
     const container = document.createElement('div');
     const allButton = document.createElement('button')
     allButton.innerText = 'All'
+    allButton.addEventListener('click', () => {filteredTask(null)});
+
     const incompleteButton = document.createElement('button')
     incompleteButton.innerText = 'Incomplete'
+    incompleteButton.addEventListener('click', () => {filteredTask(true)});
+
     const completeButton = document.createElement('button')
     completeButton.innerText = 'Complete'
+    completeButton.addEventListener('click', () => {filteredTask(false)});
+
     container.append(allButton, incompleteButton, completeButton)
     return container
 }

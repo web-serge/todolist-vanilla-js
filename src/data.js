@@ -7,7 +7,7 @@ let subscriber = null;
 export function subscribe(listener) {
     subscriber = listener
 }
-let currentId = ''
+let currentValue = null
 export let inputValue = '';
 //Присваиваем новое вэлью инпуту при вводе каждого нового символа
 export function changeInput(e) {
@@ -15,7 +15,7 @@ export function changeInput(e) {
     subscriber()
 }
 export function getData() {
-    const filteredState = state.filter(i => i.id !== currentId)
+    const filteredState = state.filter(i => i.isDone !== currentValue)
     return filteredState
 }
 
@@ -23,7 +23,6 @@ export function getData() {
 
 export function deleteTask(id) {
     state = state.filter(i => i.id !== id)
-    currentId = id
     subscriber()
 }
 //Добавляем новую таску
@@ -35,5 +34,9 @@ export function addNewTask(value) {
     }
     state.push(newTask)
     inputValue = ''
+    subscriber()
+}
+export function filteredTask(value) {
+    currentValue = value
     subscriber()
 }
