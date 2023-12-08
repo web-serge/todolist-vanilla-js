@@ -1,4 +1,4 @@
-import {deleteTask, filteredTask} from "../../data.js";
+import {changeChecked, deleteTask, filteredTask} from "../../data.js";
 
 export function renderTodolist(state) {
     const container = document.createElement('div');
@@ -17,9 +17,14 @@ function createTodolistItems(state) {
 //создаём разметку для таски
 function createItem(state, isDone, title, id) {
     const container = document.createElement('div'),
-          checkboxElement = createCheckbox(isDone),
+          checkboxElement = createCheckbox(isDone, id),
           titleElement = createTitle(title),
           deleteButton = createDeleteButton(id);
+    checkboxElement.addEventListener('click', (e) => {
+        const current = e.currentTarget
+        console.log(current.checked, id)
+        changeChecked(current.checked, id)
+    })
 
     container.append(checkboxElement, titleElement, deleteButton)
     return container
