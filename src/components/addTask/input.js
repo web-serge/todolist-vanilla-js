@@ -15,6 +15,11 @@ function createInputElement() {
         inputElement.blur()
         changeInput(e.data)
     })
+    // Для фокуса поля ввода при перерисовке используем setTimeOut или requestAnimationFrame
+    // setTimeout(() => {inputElement.focus()}, 0)
+    requestAnimationFrame(() => {
+        inputElement.focus()
+    })
     return inputElement
 }
 

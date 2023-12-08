@@ -24,7 +24,6 @@ export function getData() {
 export function deleteTask(id) {
     state = state.filter(i => i.id !== id)
     currentId = id
-    console.log(id)
     subscriber()
 }
 //Добавляем новую таску

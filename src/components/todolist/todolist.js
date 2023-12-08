@@ -2,7 +2,6 @@ import {deleteTask} from "../../data.js";
 
 export function renderTodolist(state) {
     const container = document.createElement('div');
-
     container.append(createFilterButtons(), createTodolistItems(state))
     return container;
 }
