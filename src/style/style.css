@@ -5,21 +5,137 @@
 }
 
 body {
-  background-image: url("../../assets/images/background.jpg");
+  position: relative;
+  font-family: "Roboto", sans-serif;
+  height: 100vh;
+  width: 100%;
+}
+body::before {
+  content: "";
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  bottom: 0;
+  left: 0;
+  background-image: url("../../assets/images/background.svg");
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: top;
+  background-position: center;
+}
+
+input[type=text] {
+  outline: none;
+  border: 1px solid transparent;
+  padding: 5px;
+  border-radius: 5px;
+}
+input[type=text].active {
+  border: 1px solid red;
+}
+input[type=text].active::placeholder {
+  color: red;
+}
+
+input[type=checkbox] {
+  outline: none;
+  border: 1px solid transparent;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+button {
+  font-family: inherit;
+  border: 1px solid transparent;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 0 5px 10px 0;
+  cursor: pointer;
+  color: #fff;
+  background: lightslategrey;
+  transition: all 0.5s;
+}
+button.active {
+  background: rgba(98, 128, 245, 0.7);
+}
+
+button:focus, button:active {
+  outline: none;
+}
+
+.addTask {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0 0 10px 0;
+}
+.addTask__button {
+  background-image: url("../../assets/images/add-to-svgrepo-com.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 10px;
+  margin: 0;
+  border-radius: 50%;
+  background-color: transparent;
+}
+.addTask__button:hover, .addTask__button:focus, .addTask__button:active {
+  transform: scale(1.2);
+}
+
+.button__filtration button:hover, .button__filtration button:focus,
+.button__filtration button:active {
+  background-color: blue;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+li {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+}
+li button {
+  background-color: transparent;
+  padding: 8px;
+  margin: 0;
+  background-image: url("../../assets/images/delete-svgrepo-com.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+li button:hover {
+  transform: scale(1.2);
+}
+
+label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 #root {
   max-width: 1200px;
   width: 100%;
-  height: 100vh;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: stretch;
+}
+
+.todolist {
+  padding: 15px;
+  border-radius: 5px;
+  background: linear-gradient(90deg, #b9deed, #efefef);
+}
+
+.complete-task {
+  text-decoration: line-through;
+  color: rgba(0, 0, 0, 0.5);
 }
 
 /*# sourceMappingURL=style.css.map */

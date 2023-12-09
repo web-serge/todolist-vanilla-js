@@ -1,8 +1,10 @@
-import {changeChecked, deleteTask, filteredTask} from "../../data.js";
+import {changeChecked, currentValue, deleteTask, filteredTask} from "../../data.js";
+import {renderAddTask} from "../addTask/input.js";
 
 export function renderTodolist(state) {
     const container = document.createElement('div');
-    container.append(createFilterButtons(), createTodolistItems(state))
+    container.classList.add('todolist')
+    container.append(renderAddTask(), createFilterButtons(), createTodolistItems(state))
     return container;
 }
 //рендер всех тасок ul > li ...
@@ -16,17 +18,23 @@ function createTodolistItems(state) {
 }
 //создаём разметку для таски
 function createItem(state, isDone, title, id) {
-    const container = document.createElement('div'),
+    const container = document.createElement('li'),
+          labelElement = document.createElement('label'),
           checkboxElement = createCheckbox(isDone, id),
           titleElement = createTitle(title),
           deleteButton = createDeleteButton(id);
+
     checkboxElement.addEventListener('click', (e) => {
         const current = e.currentTarget
-        console.log(current.checked, id)
         changeChecked(current.checked, id)
     })
 
-    container.append(checkboxElement, titleElement, deleteButton)
+    //добавляем стили для выполненных тасок
+    !!isDone ? titleElement.classList.add('complete-task') : null
+
+    //append
+    labelElement.append(checkboxElement, titleElement)
+    container.append(labelElement, deleteButton)
     return container
 }
 //Разметка чекбокс
@@ -45,24 +53,34 @@ function createTitle(title) {
 //Разметка кнопки удаления таски
 function createDeleteButton(id) {
     const deleteButtonElement = document.createElement('button');
-    deleteButtonElement.innerText = '❎';
     deleteButtonElement.addEventListener('click', () => deleteTask(id))
     return deleteButtonElement
 }
 //Разметка кнопок фильтрации
 function createFilterButtons() {
     const container = document.createElement('div');
+    container.classList.add('button__filtration');
+
     const allButton = document.createElement('button')
-    allButton.innerText = 'All'
-    allButton.addEventListener('click', () => {filteredTask(null)});
+    allButton.innerText = 'All';
+    currentValue === null ? allButton.classList.add('active') : null
+    allButton.addEventListener('click', () => {
+        filteredTask(null)
+    });
 
     const incompleteButton = document.createElement('button')
     incompleteButton.innerText = 'Incomplete'
-    incompleteButton.addEventListener('click', () => {filteredTask(true)});
+    currentValue === true ? incompleteButton.classList.add('active') : null
+    incompleteButton.addEventListener('click', () => {
+        filteredTask(true)
+    });
 
     const completeButton = document.createElement('button')
     completeButton.innerText = 'Complete'
-    completeButton.addEventListener('click', () => {filteredTask(false)});
+    currentValue === false ? completeButton.classList.add('active') : null
+    completeButton.addEventListener('click', () => {
+        filteredTask(false)
+    });
 
     container.append(allButton, incompleteButton, completeButton)
     return container

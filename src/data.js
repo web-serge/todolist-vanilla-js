@@ -10,8 +10,7 @@ let subscriber = null;
 export function subscribe(listener) {
     subscriber = listener
 }
-let currentValue = null
-
+export let currentValue = null
 //getter data
 export function getData() {
     const filteredState = state.filter(i => i.isDone !== currentValue)
@@ -34,7 +33,7 @@ export function deleteTask(id) {
 export function addNewTask(value) {
     const newTask = {
         id: Math.random().toString(),
-        title: value,
+        title: value.trim(),
         isDone: false
     }
     state.push(newTask)
