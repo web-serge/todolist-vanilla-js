@@ -15,7 +15,8 @@ function createInputElement() {
     inputElement.type = 'text'
     inputElement.addEventListener('input', (e) => {
         inputElement.classList.remove('active')
-        changeInput(e.data)
+        console.log(inputElement.value)
+        changeInput(inputElement.value)
     })
     // Для фокуса поля ввода при перерисовке используем setTimeOut или requestAnimationFrame
     // setTimeout(() => {inputElement.focus()}, 0)

@@ -5,6 +5,7 @@ let state = [
     {id: '3', title: 'Learn CSS', isDone: true},
 ];
 export let inputValue = '';
+
 let subscriber = null;
 //
 export function subscribe(listener) {
@@ -18,8 +19,8 @@ export function getData() {
 }
 
 //Присваиваем новое вэлью инпуту при вводе каждого нового символа
-export function changeInput(e) {
-    inputValue += e
+export function changeInput(value) {
+    inputValue = value
     subscriber()
 }
 
